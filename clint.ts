@@ -144,5 +144,39 @@ export function MyComponent() {
     }
   }
 
-  return <button onClick={handlePermissionCheck}>Check Permissions</button>;
+  async function handleAddPolicy() {
+    try {
+      const response = await addPolicy(
+        "entityName",
+        "write",
+        "userName",
+        fetch
+      );
+      console.log(response);
+    } catch (error) {
+      console.error("Error adding policy:", error);
+    }
+  }
+
+  async function handleRevokePolicy() {
+    try {
+      const response = await revokePolicy(
+        "entityName",
+        "write",
+        "userName",
+        fetch
+      );
+      console.log(response);
+    } catch (error) {
+      console.error("Error revoking policy:", error);
+    }
+  }
+
+  return (
+    <div>
+      <button onClick={handlePermissionCheck}>Check Permissions</button>
+      <button onClick={handleAddPolicy}>Add Policy</button>
+      <button onClick={handleRevokePolicy}>Revoke Policy</button>
+    </div>
+  );
 }
